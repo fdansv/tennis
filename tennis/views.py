@@ -14,7 +14,7 @@ def index(request):
 		pass
 
 	def add_year(year):
-
+		print "adding year"
 		def download_year():
 			url = 'http://tennis-data.co.uk/'+year+'/'+year+'.zip'
 			return StringIO(urllib.urlopen(url).read())
@@ -24,9 +24,10 @@ def index(request):
 			return zip.extract(year + ".xls")
 		
 		def process_XLS():
+			
 			file = unzip()
-			print file
-
+			sheet = xlrd.open_workbook(file).sheets()[0]
+			print sheet
 		process_XLS()
 			
 
